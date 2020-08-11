@@ -95,7 +95,47 @@ public class MainActivity extends AppCompatActivity implements
     private UserLocation mUserLocation;
     private FusedLocationProviderClient mFusedLocationClient;
     
-    private boolean checkMapServices(){
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        mProgressBar = findViewById(R.id.progressBar);
+       findViewById(R.id.fab_create_chatroom).setOnClickListener(this);
+       
+       mFusedLocationClient=LocationServices.getFusedLocationProviderClient(activity:this);
+
+        mDb = FirebaseFirestore.getInstance();
+
+        initSupportActionBar();
+    }
+    
+    //KNOW THE USER'S LAST POSITION 
+    
+     private void getLastKnownLocation(){
+        Log.d(TAG, msg:"getLastKnownLocation:called.");
+        if(ActivityCompat.checkSelfPermission(context this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
+            return;
+        }
+        mFusedLocationClient.getLastKnownLocation().addOnCompleteListener(new OnCompleteListener<Location>(){
+            @Override
+            public void OnComplete(@Nonnull Task<Location> task){
+                if(task.isSuccessful()){
+                    Location location = task.getResult();
+                    Geopoint geoPoint = new Geopoint(location.getLatitude(), location.getLongitude());
+                    Log.d(TAG, msg:"onComplete:latitude:"+ geoPoint.getLatitude());
+                    Log.d(TAG, msg:"onComplete:longitude:"+ geoPoint.getLongitude());
+                    mUserLocation.setGeopoint(geoPoint);
+                    mUserLocation.setTimestamp(null);
+                    saveUserLocation();
+                }
+            }
+        });
+    }
+    
+   
+   //KNOW IF THE USER HAS INSTALLED GOOGLE PLAY SERVICES AND HAS GEOLOCATION ENABLED
+   
+   private boolean checkMapServices(){
         if(isServicesOK()){
             if(isMapsEnabled()){
                 return true;
@@ -138,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mLocationPermissionGranted = true;
-            getChatrooms();
+            getUserDetails();
         } else {
             ActivityCompat.requestPermissions(this,
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
@@ -190,7 +230,7 @@ public class MainActivity extends AppCompatActivity implements
         switch (requestCode) {
             case PERMISSIONS_REQUEST_ENABLE_GPS: {
                 if(mLocationPermissionGranted){
-                    getChatrooms();
+                    getUserDetails();
                 }
                 else{
                     getLocationPermission();
@@ -199,17 +239,6 @@ public class MainActivity extends AppCompatActivity implements
         }
 
     }
-    
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        mProgressBar = findViewById(R.id.progressBar);
-       findViewById(R.id.fab_create_chatroom).setOnClickListener(this);
-
-        mDb = FirebaseFirestore.getInstance();
-
-        initSupportActionBar();
         
     @Override
     protected void onResume() {
@@ -220,10 +249,8 @@ public class MainActivity extends AppCompatActivity implements
             } else {
                 getLocationPermission();
             }
-        } else {
-            return;
+       
         }
-    }
        
     }
     
@@ -336,11 +363,11 @@ public class User implements Parcelable{
 import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.ServerTimestamp;
 public class UserLocation{
-    private GeoPoint geopoint;
+    private GeoPoint geo_point;
     private @ServerTimestamp String timestamp;
     private User user;
-    public UserLocation(GeoPoint geopoint, String timestamp, User user){
-        this.geopoint=geopoint;
+    public UserLocation(GeoPoint geo_point, String timestamp, User user){
+        this.geo_point=geo_point;
         this.timestamp=timestamp;
         this.user=user;
     }
@@ -348,19 +375,19 @@ public class UserLocation{
 
     }
 
-    public GeoPoint getGeopoint() {
-        return geopoint;
+    public GeoPoint getGeo_point() {
+        return geo_point;
     }
 
-    public void setGeopoint(GeoPoint geopoint) {
-        this.geopoint = geopoint;
+    public void setGeo_point(GeoPoint geo_point) {
+        this.geo_point = geo_point;
     }
 
-    public String getTimestamp() {
+    public Date getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
+    public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -374,7 +401,7 @@ public class UserLocation{
     @Override
     public String toString(){
         return "UserLocation{" +
-                "geopoint=" +geopoint +
+                "geo_point=" +geo_point +
                 ", timestamp='" + timestamp + '\'' +
                 ", user=" +user +
                 '}';
