@@ -442,4 +442,17 @@ public class UserListFragment extends Fragment {
     }
 }
 
+/*This program is mainly used to import the map from google maps and to insert markers on it. 
+After logging in (separate piece of the program) a warning appears asking to activate geolocation because without it the app would lose some of its functionality. 
+Furthermore, it is useful for us to know where our user is when he reports a certain place in order not to have legal problems. 
+Once geolocation is enabled, the map opens with all the integrated markers. 
+In the program there are two methods for inserting new markers, one is used to locate the various rooms that will decide to download the app and the other, 
+instead, is used by users to report any problems encountered in the room itself.
+The first marker is entered directly from Firebase. 
+In a nutshell, the owner of a place, at the time of registration, will write, in a special form, the name and the precise address of the place he manages. 
+This information will be saved on Firebase in the dedicated section and then directly taken from the code, which will mark a marker on the map.
+The second marker, on the other hand, can be entered directly by the user by simply clicking on the map.
+So, if a user wants to report a place because it does not comply with the rules dictated by state institutions or for other reasons, 
+just open the application (and after logging in and activating the geolocation) and click on the place to report. 
+At that point a new marker will come out which will later be saved on firebase. Both markers can be controlled directly by application administrators.*/
 
