@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mProgressBar = findViewById(R.id.progressBar);
-       findViewById(R.id.fab_create_chatroom).setOnClickListener(this);
+    
        
        mFusedLocationClient=LocationServices.getFusedLocationProviderClient(activity:this);
 
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements
                 @Override
                 public void onComplete(@Nonnull Task <DocumentSnapshot> task){
                    if(task.isSuccessful()){
-                       Log.d(TAG,msq:"onComplete:successfully get the user details.");
+                       Log.d(TAG,msg:"onComplete:successfully get the user details.");
                        User user= task.getResult().toObject(User.class);
                        mUserLocation.setUser(user);
                        getLastKnownLocation();
@@ -248,8 +248,8 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String permissions[],
-                                           @NonNull int[] grantResults) {
+                                           @Nonnull String permissions[],
+                                           @Nonnull int[] grantResults) {
         mLocationPermissionGranted = false;
         switch (requestCode) {
             case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
@@ -547,16 +547,16 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
         this.mUsers = users;
     }
 
-    @NonNull
+    @Nonnull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@Nonnull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_user_list_item, parent, false);
         final ViewHolder holder = new ViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@Nonnull ViewHolder holder, int position) {
 
         ((ViewHolder)holder).username.setText(mUsers.get(position).getUsername());
         ((ViewHolder)holder).email.setText(mUsers.get(position).getEmail());
