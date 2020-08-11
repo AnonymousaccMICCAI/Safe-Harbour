@@ -632,8 +632,8 @@ public class UserListFragment extends Fragment {
 After logging in (separate piece of the program) a warning appears asking to activate geolocation because without it the app would lose some of its functionality. 
 Furthermore, it is useful for us to know where our user is when he reports a certain place in order not to have legal problems. 
 Once geolocation is enabled, the map opens with all the integrated markers. 
-In the program there are two methods for inserting new markers, one is used to locate the various rooms that will decide to download the app and the other, 
-instead, is used by users to report any problems encountered in the room itself.
+In the program there are two methods for inserting new markers, one is used to locate the various venues that will decide to download the app and the other, 
+instead, is used by users to report any problems encountered in the venue itself.
 The first marker is entered directly from Firebase. 
 In a nutshell, the owner of a place, at the time of registration, will write, in a special form, the name and the precise address of the place he manages. 
 This information will be saved on Firebase in the dedicated section and then directly taken from the code, which will mark a marker on the map.
