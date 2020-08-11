@@ -109,6 +109,45 @@ public class MainActivity extends AppCompatActivity implements
         initSupportActionBar();
     }
     
+    // GET USER DETAILS
+    
+    
+        private void getUserDetails(){
+        if(mUserLocation==null){
+            mUserLocation= new UserLocation();
+            DocumentReference userRef =mDb.collection(getString(R.string.collection_users)).document(FirebaseAuth.getInstance().getUid());
+            userRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>(){
+                @Override
+                public void onComplete(@Nonnull Task <DocumentSnapshot> task){
+                   if(task.isSuccessful()){
+                       Log.d(TAG,msq:"onComplete:successfully get the user details.");
+                       User user= task.getResult().toObject(User.class);
+                       mUserLocation.setUser(user);
+                       getLastKnownLocation();
+                   }
+                }
+            });
+        }
+    }
+
+    
+    //SAVE THE USER'S LAST POSITION 
+    
+        private void saveUserLocation(){
+        if(mUserLocation!=null){
+            DocumentReference locationRef =mDb.collection(getString(R.string.collection_user_locations)).document(FirebaseAuth.getInstance().getUid());
+            locationRef.set(mUserLocation).addOnCompleteListener(new OnCompleteListener<Void>(){
+                @Override
+                        public void onComplete(@Nonnull Task<Void> task){
+                    if(task.isSuccesfull()){
+                        Log.d(TAG, msg:"saveUserLocation: \n inserted user location into database."+"\n latitude: " + mUserLocation.getGeo_point().getLatitude()+ "\n longitude;:" + mUserLocation.getGeo_point().getLongitude());
+                    }
+                }
+            });
+
+        }
+    }
+    
     //KNOW THE USER'S LAST POSITION 
     
      private void getLastKnownLocation(){
@@ -460,7 +499,7 @@ public class ClusterMarker implements ClusterItem{
     }
 }
 
-//PROGRAM TO DISPLAY THE MARKER ON THE MAP
+//CLASS TO DISPLAY THE MARKER ON THE MAP
 
 public class MyClusterManagerRenderer extends DefaultClusterRenderer<ClusterMarker> {
     private final IconGenerator iconGenerator;
@@ -484,8 +523,8 @@ public class MyClusterManagerRenderer extends DefaultClusterRenderer<ClusterMark
     @Override
     protected void onBeforeClusterItemRendered(ClusterMarker item, MarkerOptions markerOptions){
         imageView.setImageResource(item.getIconPicture());
-        Bitmap icon -iconGenerator.makeIcon();
-        markerOptions.icon(BitmapDescriptionFactory.fromBitmap(icon));
+        Bitmap icon= iconGenerator.makeIcon();
+        markerOptions.icon(BitmapDescriptionFactory.fromBitmap(icon)).title(item.getTitle());
 
     }
     protected boolean ShouldRenderAsCluster(Cluster<ClusterMarker>cluster){
