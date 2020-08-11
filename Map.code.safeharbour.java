@@ -94,8 +94,21 @@ public class MainActivity extends AppCompatActivity implements
     private UserLocation mUserLocation;
     private FusedLocationProviderClient mFusedLocationClient;
     
+     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        mProgressBar = findViewById(R.id.progressBar);
+       findViewById(R.id.fab_create_chatroom).setOnClickListener(this);
 
-//CLASS USER CLIENT FOR USER CLASS AND USEL LOCATION CLASS
+        mDb = FirebaseFirestore.getInstance();
+
+        initSupportActionBar();
+       
+    }
+    
+
+//CLASS USER CLIENT FOR USER CLASS AND USER LOCATION CLASS
 
 public class UserClient extends Application {
 
@@ -112,7 +125,7 @@ public class UserClient extends Application {
 }
 
 
-//CLASS USER FOR USERL LOCATION
+//CLASS USER FOR USER LOCATION
 
 public class User implements Parcelable{
 
