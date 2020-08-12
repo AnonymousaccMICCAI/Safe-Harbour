@@ -20,9 +20,9 @@ So the next time you are in a crowded place or in a bar that doesen't respect sa
 
 ## :gem: What makes it so special
 
-* You have now the possibility to choose the safest places to go or visit in order to have a greater level  of confidence if you need to go out
+* You have now the possibility to choose the safest places to go or visit in order to have a higher level  of confidence if you need to go out
 
-* The data that is collected is quite important because if a place for example has only good reviews (that are detected) could affect his ensurance
+* The data that is collected is quite important, because if a place for example has only good reviews, that are detected, this could affect his ensurance
 
 * It could be used by police officers in order to see where to intervene (in case of crowding or bad hygenical standards)
 
@@ -45,6 +45,12 @@ So the next time you are in a crowded place or in a bar that doesen't respect sa
 * Safety level
 
 * Others (we have some other ideas that are displayed in our presentation)
+
+## 📃 Documentation
+
+In order to write the files we read some documentation that was useful, it gave us an idea on the best functions and method to implement, some of them are online videos and some of them are actual documents here is what we've consulted:
+
+
 
 ___
 
