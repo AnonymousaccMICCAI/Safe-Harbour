@@ -46,12 +46,6 @@ So the next time you are in a crowded place or in a bar that doesen't respect sa
 
 * Others (we have some other ideas that are displayed in our presentation)
 
-## 📃 Documentation
-
-In order to write the files we read some documentation that was useful, it gave us an idea on the best functions and method to implement, some of them are online videos and some of them are actual documents here is what we've consulted:
-
-
-
 ___
 
 ### :speech_balloon: Suggestions
