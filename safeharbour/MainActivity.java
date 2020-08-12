@@ -1,6 +1,6 @@
 package com.example.safeharbour;
 
-// da cambiare le variabili e scriverle in inglese cambiare anche database
+
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
     //
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private DocumentReference mDocRef = db.document("SampleData/segnalazione");
-    private CollectionReference systemRef = mDocRef.collection("utenze");
+    private DocumentReference mDocRef = db.document("SampleData/report");
+    private CollectionReference systemRef = mDocRef.collection("user_report");
     private FirebaseAnalytics mAnalytics= FirebaseAnalytics.getInstance(this);
 
     @Override
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         dataToSave.put(COORDINATES_KEY, coordinatesText);
 
         systemRef.add(dataToSave);
-        // doesen't send a message to log
+
 
     };
 
@@ -133,28 +133,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        //        public void fetchdata (View view){
-    //
-    //
-    //            mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-    //                @Override
-    //                public void onSuccess(DocumentSnapshot documentSnapshot) {
-    //                    if (documentSnapshot.exists()){
-    //                        String commentTxt = documentSnapshot.getString(COMENT_KEY);
-    //                        String coordinatesTxt = documentSnapshot.getString(COORDINATES_KEY);
-    //                        //.toObject(geopoint.class) prende l'oggetto e lo trasforma in quello specificato
-    //                        mCommentoTextView.setText("\"" + commentTxt +"\" --" + coordinatesTxt);
-    //                    }
-    //                    Log.d(TAG,"Documenti sono stati presi");
-    //                };
-    //            }).addOnFailureListener(new OnFailureListener() {
-    //                @Override
-    //                public void onFailure(@NonNull Exception e) {
-    //                    Log.w(TAG, "Documenti non sono stati presi");
-    //                };
-    //            });
-    //
-    //        }
 
     public void logout(final View view) {
         FirebaseAuth.getInstance().signOut();
