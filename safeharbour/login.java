@@ -49,7 +49,7 @@ public class login extends AppCompatActivity {
 
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("306081528454-u7v54jnh84b5ub4cv7dfj8mheb9qblil.apps.googleusercontent.com")
+                .requestIdToken("***") // this is private
                 .requestEmail()
                 .build();
 
