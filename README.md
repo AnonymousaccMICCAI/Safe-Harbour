@@ -28,7 +28,7 @@ So the next time you are in a crowded place or in a bar that doesen't respect sa
 
 * We could see the places where the virus has higher incidence (due to poor safety measures that generates bad reviews) and better cointain virus spreading
 
-## :trumpet: How are we going to achieve it
+## :trumpet: How we are going to achieve it
 
 1) The app gives you the acces to google maps, manage user interactions, displays what other users have reported and makes you do your own report
 
