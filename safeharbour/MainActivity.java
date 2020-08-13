@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
     }
     
     // go to map
-    public void Retrn2map(View retu){
+    public void Retrn2map(View retrn2map){
         startActivity(new Intent(getApplicationContext(),MapsActivity.class));
     }
 
