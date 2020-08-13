@@ -29,7 +29,6 @@ ___
 
 * we used android studio functions to display the map
 
-*The idea is that the code will give you the ability to set a pointer on the map that is going to be displayed with others to all users.The marker location will be translated in coordinates,all geopoints corresponding to a specific location will be saved on the database via the firebase method we wrote in our code. (we are not courrently able, in our application, to gain coordinates but we are able to store objects in the database). We are taking example from this code to implement the geolocalization:*   
 * we used parts from this code >https://github.com/mitchtabian/Google-Maps-2018
 
 
