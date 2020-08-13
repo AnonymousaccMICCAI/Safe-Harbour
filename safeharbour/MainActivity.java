@@ -127,6 +127,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    
+    // onclick of mapactivity
+        public void AddComment(View retu){
+        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+    }
+    
+    // go to map
+    public void Retrn2map(View retu){
+        startActivity(new Intent(getApplicationContext(),MapsActivity.class));
+    }
 
 
     }
