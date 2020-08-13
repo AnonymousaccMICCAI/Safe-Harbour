@@ -48,6 +48,12 @@ So the next time you are in a crowded place or in a bar that doesen't respect sa
 
 ___
 
+### 📂 Directories
+* InVision prototype : file you have to run with inVision in order to see the prototype + video
+* Presentarion: ppt presentation
+* safeharbour : AndroidStudio files + video
+* screenshots : some pictures of Firebase console and of the code
+
 ### :speech_balloon: Suggestions
 
 If you want to help us you can fork this repo and send us a pull request, if you want more in depth explanation read our documents or our ppt presentation.
