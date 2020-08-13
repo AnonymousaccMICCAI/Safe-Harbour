@@ -33,7 +33,7 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity {
 
     public static final String  COMENT_KEY = "coment";
-    public static final String COORDINATES_KEY = "coordinate";
+    public static final String POSITIVITY_KEY = "pos";
     public static final String TAG = "messaggio";
 
     TextView mCommentoTextView;
@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         //Log.d("tag", "onCreate: " + Objects.requireNonNull(firebaseAuth.getCurrentUser()).getEmail() + firebaseAuth.getCurrentUser().getDisplayName());
 
     };
+    
+    //load data on database
     @SuppressLint("InvalidAnalyticsName")
     public void loadData (View view) {
         // register the interaction and send to analythics
@@ -62,49 +64,23 @@ public class MainActivity extends AppCompatActivity {
         mAnalytics.logEvent(btnName,bundle);
 
 
-        EditText coordinatesView = (EditText) findViewById(R.id.coordinateTXT);
+        EditText positivityView = (EditText) findViewById(R.id.positivityTXT);
         EditText comentView = (EditText) findViewById(R.id.commentoTXT);
-        String coordinatesText = coordinatesView.getText().toString();
+        String positivityText = coordinatesView.getText().toString();
         String comentText = comentView.getText().toString();
 
 
         if (coordinatesText.isEmpty() || comentText.isEmpty()) { return; }
         HashMap<String, Object> dataToSave = new HashMap<String, Object>();
         dataToSave.put(COMENT_KEY, comentText);
-        dataToSave.put(COORDINATES_KEY, coordinatesText);
+        dataToSave.put(POSITIVITY_KEY, coordinatesText);
 
         systemRef.add(dataToSave);
 
 
     };
 
-
-
-    public void saveData (View view) {
-        EditText coordinatesView = (EditText) findViewById(R.id.coordinateTXT);
-        EditText commentView = (EditText) findViewById(R.id.commentoTXT);
-        String coordinatesText = coordinatesView.getText().toString();
-        String commentText = commentView.getText().toString();
-
-        if (coordinatesText.isEmpty() || commentText.isEmpty()) { return; }
-        Map<String, Object> dataToSave = new HashMap<String, Object>();
-        dataToSave.put(COMENT_KEY, commentText);
-        dataToSave.put(COORDINATES_KEY, coordinatesText);
-        mDocRef.set(dataToSave).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Log.d(TAG,"Document is saved");
-            };
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.w(TAG, "Document isn't saved");
-            };
-        });
-
-
-    }
-
+//gets data from the database
         public void fetchdata (View view){
 
             systemRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -115,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
                     for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                         String commentTxt = documentSnapshot.getString(COMENT_KEY);
-                        String coordinatesTxt = documentSnapshot.getString(COORDINATES_KEY);
+                        String coordinatesTxt = documentSnapshot.getString(POSITIVITY_KEY);
                         data += "\"" + commentTxt + "\" --" + coordinatesTxt + "\n\n";
                         //.toObject(geopoint.class) transform the object in geopoint
                     }
@@ -133,7 +109,8 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-
+// logout from the app
+    
     public void logout(final View view) {
         FirebaseAuth.getInstance().signOut();
 
