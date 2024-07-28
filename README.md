@@ -1,5 +1,4 @@
 # Safe Harbour
-
 Hi, we are a group of students from Italy that gathered toghether in order to compete to the HCL Better health Hackaton.
 
 By clicking the link in the project page or randomly visiting this repo you have now acces to part of the work we've done.
